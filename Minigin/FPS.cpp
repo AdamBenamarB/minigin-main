@@ -5,7 +5,7 @@
 dae::FPS::FPS(GameObject* owner)
 	:Component{ owner }
 {
-	m_TextComponent = m_GameObject->GetComponent<TextComponent>();
+	m_TextComponent = GetGameObject()->GetComponent<TextComponent>();
 	m_TextComponent->SetText("0");
 }
 

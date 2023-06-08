@@ -12,7 +12,7 @@ void dae::RenderComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		auto pos = m_GameObject->GetTransform().GetPosition();
+		auto pos = GetGameObject()->GetTransform()->GetWorldPosition();
 
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}

@@ -1,5 +1,4 @@
 #pragma once
-#include "Transform.h"
 
 namespace dae
 {
@@ -10,6 +9,7 @@ namespace dae
 	{
 	public:
 		virtual void Update(float deltaTime);
+		GameObject* GetGameObject() const { return m_GameObject; }
 
 		Component(GameObject* owner);
 		~Component() = default;

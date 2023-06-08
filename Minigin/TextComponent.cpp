@@ -13,7 +13,7 @@ dae::TextComponent::TextComponent(GameObject* owner)
 	: m_NeedsUpdate(true), m_Text("NULL"), m_Font(nullptr), m_TextTexture(nullptr)
 	, Component{ owner }
 {
-	m_RenderComponent = m_GameObject->AddComponent<RenderComponent>();
+	m_RenderComponent = GetGameObject()->AddComponent<RenderComponent>();
 }
 
 

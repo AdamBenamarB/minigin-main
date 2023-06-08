@@ -17,29 +17,30 @@ namespace dae
 		virtual void FixedUpdate(float timeStep);
 
 		void SetPosition(float x, float y);
-		Transform GetTransform() const { return m_transform; }
+		Transform* GetTransform() const { return m_transform; }
 
 		template<typename T> T* AddComponent();
 		template<typename T> void RemoveComponent();
 		template<typename T> T* GetComponent()const;
 		//bool HasComponent(Component* comp);
 
-		GameObject() = default;
+		GameObject() { m_transform = AddComponent<Transform>(); }
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		void SetParent(GameObject* parent, bool worldPosStays);
+		void SetParent(GameObject* parent, bool worldPosStays = true);
 		GameObject* GetParent() const { return m_pParent; }
 		void RemoveChild(GameObject* child);
 		void AddChild(GameObject* child);
 
 	private:
 		std::vector<std::shared_ptr<Component>> m_Components;
-		Transform m_transform{};
-		GameObject* m_pParent;
+		std::vector<GameObject*> m_Children{};
+		Transform* m_transform{};
+		GameObject* m_pParent = nullptr;
 	};
 }
 
