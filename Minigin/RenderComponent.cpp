@@ -10,11 +10,17 @@ dae::RenderComponent::RenderComponent(GameObject* owner)
 {}
 void dae::RenderComponent::Render() const
 {
-	if (m_Texture != nullptr)
+	if (m_Enabled)
 	{
-		auto pos = GetGameObject()->GetTransform()->GetWorldPosition();
+		if (m_Texture != nullptr)
+		{
+			auto pos = GetGameObject()->GetTransform()->GetWorldPosition();
 
-		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+			if (m_UseDimensions)
+				Renderer::GetInstance().RenderTexture(*m_Texture, pos.x + m_OffsetX, pos.y + m_OffsetY, m_Width, m_Height);
+			else
+				Renderer::GetInstance().RenderTexture(*m_Texture, pos.x + m_OffsetX, pos.y + m_OffsetY);
+		}
 	}
 }
 
@@ -26,4 +32,21 @@ void dae::RenderComponent::SetTexture(std::shared_ptr<Texture2D> texture)
 void dae::RenderComponent::SetTexture(const std::string& filename)
 {
 	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
+}
+
+void dae::RenderComponent::SetDimensions(float width, float height)
+{
+	m_UseDimensions = true;
+	m_Width = width;
+	m_Height = height;
+}
+
+void dae::RenderComponent::SetOffsetX(float x)
+{
+	m_OffsetX = x;
+}
+
+void dae::RenderComponent::SetOffsetY(float y)
+{
+	m_OffsetY = y;
 }

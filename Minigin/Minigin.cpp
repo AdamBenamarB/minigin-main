@@ -7,6 +7,7 @@
 #include "Minigin.h"
 
 #include <chrono>
+#include <thread>
 
 #include "InputManager.h"
 #include "SceneManager.h"
@@ -123,6 +124,9 @@ void dae::Minigin::Run()
 			sceneManager.Update(deltaTime);
 			renderer.Render();
 			lastTime = currentTime;
+
+			const auto sleepTime = currentTime + std::chrono::milliseconds(Minigin::MsPerFrame) - std::chrono::high_resolution_clock::now();
+			std::this_thread::sleep_for(sleepTime);
 		}
 	}
 	

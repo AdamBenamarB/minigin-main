@@ -2,9 +2,11 @@
 #include <iostream>
 
 #include "GameObject.h"
+#include "../BubbleBobble/BubComponent.h"
 
 namespace dae
 {
+	class BubComponent;
 	class PepperComponent;
 	class PeterPepperComponent;
 	class HealthComponent;
@@ -21,12 +23,33 @@ namespace dae
 		std::shared_ptr<GameObject>  object;
 	};
 
-	/*class AddPointsCommand : public Command
+	class Idle : public Command
 	{
 	public:
-		AddPointsCommand(std::shared_ptr<GameObject> obj) :Command(obj) {}
-		void Execute() override { GetGameObject()->GetComponent<PointsComponent>()->AddPoints(100); }
-	};*/
+		Idle(std::shared_ptr<GameObject> obj) :Command(obj) {}
+		void Execute() override { GetGameObject()->GetComponent<BubComponent>()->SetState(BubComponent::State::idle); }
+	};
+
+	class MoveLeft : public Command
+	{
+	public:
+		MoveLeft(std::shared_ptr<GameObject> obj) :Command(obj) {}
+		void Execute() override { GetGameObject()->GetComponent<BubComponent>()->SetState(BubComponent::State::left); }
+	};
+
+	class MoveRight : public Command
+	{
+	public:
+		MoveRight(std::shared_ptr<GameObject> obj) :Command(obj) {}
+		void Execute() override { GetGameObject()->GetComponent<BubComponent>()->SetState(BubComponent::State::right); }
+	};
+
+	class Jump : public Command
+	{
+	public:
+		Jump(std::shared_ptr<GameObject> obj) :Command(obj) {}
+		void Execute() override { GetGameObject()->GetComponent<BubComponent>()->Jump(); }
+	};
 
 	
 }

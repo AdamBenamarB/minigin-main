@@ -12,6 +12,7 @@ namespace dae {
         void SetOffset(float x, float y);
 
         bool IsOverlapping(GameObject* other);
+        bool IsOverlapping(GameObject* other, Vec2& overlappedAmt);
         bool IsOverlapping(Rect other);
         bool IsUnder(GameObject* other);
         bool IsUnder(Rect other);

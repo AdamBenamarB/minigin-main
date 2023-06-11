@@ -15,8 +15,8 @@ namespace dae
 	private:
 		void UpdateWorldPosition();;
 
-		glm::vec3 m_LocalPosition;
-		glm::vec3 m_WorldPosition;
+		glm::vec3 m_LocalPosition{};
+		glm::vec3 m_WorldPosition{};
 
 		bool m_IsDirty{ false };
 	};

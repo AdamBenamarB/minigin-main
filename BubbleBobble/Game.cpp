@@ -1,12 +1,16 @@
 #include "Game.h"
 
+#include "Bub.h"
+#include "BubComponent.h"
 #include "FPS.h"
 #include "RenderComponent.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "GameObject.h"
+#include "Platform.h"
 #include "Scene.h"
 #include "TextComponent.h"
+#include "Structs.h"
 
 
 void Game::LoadGame() const
@@ -38,6 +42,14 @@ void Game::LoadGame() const
 	go->SetPosition(10, 10);
 	go->AddComponent<dae::FPS>();
 	scene.Add(go);
+
+	/*go = std::make_shared<dae::GameObject>();
+	auto bub = go->AddComponent<dae::BubComponent>();
+	scene.Add(go);*/
+
+	dae::Bub bub{ scene,Vec2{10,50} };
+	dae::Platform p1{ scene,Vec2{0,300} };
+	dae::Platform p2{ scene,Vec2{100,100} };
 
 }
 

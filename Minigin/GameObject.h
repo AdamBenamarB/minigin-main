@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include "Transform.h"
-
+#include <string>
 
 namespace dae
 {
@@ -35,12 +35,15 @@ namespace dae
 		GameObject* GetParent() const { return m_pParent; }
 		void RemoveChild(GameObject* child);
 		void AddChild(GameObject* child);
+		void SetTag(std::string tag) { m_Tag = tag; }
+		const std::string& GetTag() const { return m_Tag; }
 
 	private:
 		std::vector<std::shared_ptr<Component>> m_Components;
 		std::vector<GameObject*> m_Children{};
 		Transform* m_transform{};
 		GameObject* m_pParent = nullptr;
+		std::string m_Tag{ "NONE" };
 	};
 }
 
