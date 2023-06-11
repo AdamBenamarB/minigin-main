@@ -43,7 +43,7 @@ void PrintSDLVersion()
 		version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string &dataPath)
+dae::Minigin::Minigin()
 {
 	PrintSDLVersion();
 	
@@ -63,50 +63,68 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	if (g_window == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+
 	}
 
 	Renderer::GetInstance().Init(g_window);
 
-	ResourceManager::GetInstance().Init(dataPath);
+	//ResourceManager::GetInstance().Init(dataPath);
 }
 
 dae::Minigin::~Minigin()
 {
+	Cleanup();
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(g_window);
 	g_window = nullptr;
 	SDL_Quit();
 }
 
-void dae::Minigin::Run(const std::function<void()>& load)
+void dae::Minigin::LoadGame() const
 {
-	load();
 
-	auto& renderer = Renderer::GetInstance();
-	auto& sceneManager = SceneManager::GetInstance();
-	auto& input = InputManager::GetInstance();
+}
 
-	// todo: this update loop could use some work.
-	bool doContinue = true;
-	auto lastTime = std::chrono::high_resolution_clock::now();
-	float lag = 0.0f;
 
-	while (doContinue)
+void dae::Minigin::Cleanup()
+{
+
+}
+
+
+
+void dae::Minigin::Run()
+{
+	// tell the resource manager where he can find the game data
+	ResourceManager::GetInstance().Init("../Data/");
+
+	LoadGame();
 	{
-		const auto currentTime = std::chrono::high_resolution_clock::now();
-		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
-		lastTime = currentTime;
-		lag += deltaTime;
+		auto& renderer = Renderer::GetInstance();
+		auto& sceneManager = SceneManager::GetInstance();
+		auto& input = InputManager::GetInstance();
 
-		doContinue = input.HandleInput();
-		while(lag >= m_FixedTimeStep)
+		// todo: this update loop could use some work.
+		bool doContinue = true;
+		auto lastTime = std::chrono::high_resolution_clock::now();
+		float lag = 0.0f;
+		while (doContinue)
 		{
-			sceneManager.FixedUpdate(m_FixedTimeStep);
-			lag -= m_FixedTimeStep;
+			auto currentTime = std::chrono::high_resolution_clock::now();
+			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+			lag += deltaTime;
+			while (lag >= m_FixedTimeStep)
+			{
+				sceneManager.FixedUpdate(m_FixedTimeStep);
+				lag -= m_FixedTimeStep;
+			}
+			input.Update(deltaTime);
+			doContinue = input.HandleInput();
+			sceneManager.Update(deltaTime);
+			renderer.Render();
+			lastTime = currentTime;
 		}
-		sceneManager.Update(deltaTime);
-		renderer.Render();
-
 	}
+	
 
 }

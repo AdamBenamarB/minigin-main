@@ -15,6 +15,7 @@ namespace dae
 		void Update(float deltaTime);
 		void FixedUpdate(float timeStep);
 		void Render() const;
+		std::string& GetName() { return m_name; }
 
 		~Scene();
 		Scene(const Scene& other) = delete;

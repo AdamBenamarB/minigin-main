@@ -7,16 +7,15 @@ namespace dae
 	class Minigin
 	{
 	public:
-		explicit Minigin(const std::string& dataPath);
+		Minigin();
 		~Minigin();
-		void Run(const std::function<void()>& load);
+		void Run();
+		virtual void LoadGame() const;
+		virtual void Cleanup();
 
-		Minigin(const Minigin& other) = delete;
-		Minigin(Minigin&& other) = delete;
-		Minigin& operator=(const Minigin& other) = delete;
-		Minigin& operator=(Minigin&& other) = delete;
 	private:
 
 		float m_FixedTimeStep = 0.010f;
+		static const int MsPerFrame = 16;
 	};
 }
