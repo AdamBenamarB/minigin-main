@@ -70,12 +70,19 @@ void dae::BubComponent::HandleCollision(float deltaTime)
 		{
 			if(obj->GetTag().compare("PLATFORM") == 0)
 			{
-				if(!m_IsJumping && GetState() == State::idle)
+				if(!m_IsJumping)
 				{
 					//pos.x += overlap.x;
 					pos.y -= overlap.y;
 					GetGameObject()->GetTransform()->SetLocalPosition(pos);
+					return;
 				}
+			}
+			if (obj->GetTag().compare("WALL") == 0)
+			{
+				pos.x -= overlap.x;
+				GetGameObject()->GetTransform()->SetLocalPosition(pos);
+				return;
 			}
 		}
 	}

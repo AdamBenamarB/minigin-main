@@ -42,6 +42,9 @@
     <ClInclude Include="Platform.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="Platform.cpp">
       <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

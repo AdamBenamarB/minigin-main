@@ -18,7 +18,7 @@ namespace dae {
         void Update(float deltaTime) override;
         void SetState(State state) { m_State = state; }
         State GetState() const { return m_State; }
-        void Jump() { m_IsJumping = true; }
+        void Jump() { if (!m_IsJumping) { m_IsJumping = true; m_ElapsedJump = 0.f; } }
     private:
         void HandleMovement(float deltaTime);
         void HandleCollision(float deltaTime);

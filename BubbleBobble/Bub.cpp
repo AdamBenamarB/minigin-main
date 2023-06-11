@@ -23,6 +23,7 @@ void dae::Bub::Initialize(dae::Scene& scene, Vec2 loc)
 	col->SetSize(32, 32);
 	auto rc = go->AddComponent<RenderComponent>();
 	rc->SetTexture("\\Sprites\\Bub\\Bub.png");
+	m_Bub->GetTransform()->SetLocalPosition(glm::vec3{loc.x,loc.y,0});
 
 
 	scene.Add(go);

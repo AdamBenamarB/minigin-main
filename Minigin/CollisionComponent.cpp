@@ -66,21 +66,24 @@ bool dae::CollisionComponent::IsOverlapping(GameObject* other, Vec2& overlappedA
 		if (cornerpos.y < otherpos.y || othercorner.y < pos.y)
 			return false;
 
-		if(pos.x<othercorner.x)
+		bool x = false;
+		if(pos.x < othercorner.x)
 		{
-			overlappedAmt.x = othercorner.x - pos.x;
+			overlappedAmt.x = pos.x - othercorner.x;
 		}
 
-		else if (otherpos.x < cornerpos.x)
+		else if (otherpos.x < cornerpos.x && !x)
 		{
-			overlappedAmt.x = cornerpos.x - otherpos.x;
+			overlappedAmt.x = otherpos.x - cornerpos.x;
 		}
 
+		bool y = false;
 		if (cornerpos.y > otherpos.y)
 		{
 			overlappedAmt.y =  cornerpos.y - otherpos.y;
+			y = true;
 		}
-		else if(othercorner.y > pos.y)
+		if(othercorner.y > pos.y && !y)
 		{
 			overlappedAmt.y = othercorner.y - pos.y;
 		}

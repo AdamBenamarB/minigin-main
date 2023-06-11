@@ -166,6 +166,7 @@
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlatformComponent.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bub.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlatformComponent.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
