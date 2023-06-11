@@ -16,7 +16,8 @@ void dae::Wall::Initialize(dae::Scene& scene, Vec2 loc)
 	auto go = std::make_shared<dae::GameObject>();
 
 	auto col = go->AddComponent<CollisionComponent>();
-	col->SetSize(64, 64);
+	col->SetSize(32, 32);
+	col->SetOffset(0, 0);
 	auto rc = go->AddComponent<dae::RenderComponent>();
 	rc->SetTexture("\\Sprites\\World\\Tile.png");
 	rc->SetDimensions(32, 32);

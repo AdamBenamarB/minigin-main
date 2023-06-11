@@ -23,7 +23,6 @@ void dae::BubComponent::Update(float deltaTime)
 {
 	HandleMovement(deltaTime);
 	HandleCollision(deltaTime);
-	std::cout << GetGameObject()->GetTransform()->GetWorldPosition().x<<'/n' << '/n';
 }
 
 void dae::BubComponent::HandleMovement(float deltaTime)
@@ -75,14 +74,15 @@ void dae::BubComponent::HandleCollision(float deltaTime)
 					//pos.x += overlap.x;
 					pos.y -= overlap.y;
 					GetGameObject()->GetTransform()->SetLocalPosition(pos);
-					return;
 				}
 			}
 			if (obj->GetTag().compare("WALL") == 0)
 			{
-				pos.x -= overlap.x;
+				if(GetState()==State::right)
+					pos.x -= overlap.x;
+				if (GetState() == State::left)
+					pos.x += overlap.x;
 				GetGameObject()->GetTransform()->SetLocalPosition(pos);
-				return;
 			}
 		}
 	}

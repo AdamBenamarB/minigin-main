@@ -20,6 +20,7 @@ namespace dae {
         bool IsToSide(GameObject* other);
         bool IsToSide(Rect other);
     private:
+        Vec2 CalculateOverlap(Rect rect1, Rect rect2);
         float m_Width{},
             m_Height{};
         float m_OffsetX{},

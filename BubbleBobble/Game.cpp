@@ -17,32 +17,8 @@
 void Game::LoadGame() const
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-
-	auto go = std::make_shared<dae::GameObject>();
-	go->AddComponent<dae::RenderComponent>()->SetTexture("background.tga");
-	scene.Add(go);
-
-	go = std::make_shared<dae::GameObject>();
-	go->AddComponent<dae::RenderComponent>()->SetTexture("logo.tga");
-	go->SetPosition(216, 180);
-	scene.Add(go);
-
-	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	go = std::make_shared<dae::GameObject>();
-
-	auto tc = go->AddComponent<dae::TextComponent>();
-	tc->SetFont(font);
-	tc->SetText("Programming 4 assignment");
-	go->SetPosition(80, 20);
-	scene.Add(go);
-
-	go = std::make_shared<dae::GameObject>();
-	auto text = go->AddComponent<dae::TextComponent>();
-	text->SetColor(0, 1, 0);
-	text->SetFont(font);
-	go->SetPosition(10, 10);
-	go->AddComponent<dae::FPS>();
-	scene.Add(go);
+	
+	
 
 	/*go = std::make_shared<dae::GameObject>();
 	auto bub = go->AddComponent<dae::BubComponent>();
@@ -79,6 +55,7 @@ void Game::LoadGame() const
 	dae::Wall w213{ scene,Vec2{610,384} };
 	dae::Wall w214{ scene,Vec2{610,416} };
 	dae::Wall w215{ scene,Vec2{610,448} };
+	dae::Platform p{ scene,Vec2{0,448} };
 	dae::Platform p1{ scene,Vec2{32,448} };
 	dae::Platform p2{ scene,Vec2{64,448} };
 	dae::Platform p3{ scene,Vec2{96,448} };
@@ -98,6 +75,7 @@ void Game::LoadGame() const
 	dae::Platform p17{ scene,Vec2{544,448} };
 	dae::Platform p18{ scene,Vec2{576,448} };
 	dae::Platform p19{ scene,Vec2{608,448} };
+	dae::Platform p20{ scene,Vec2{640,448} };
 	//dae::Platform p20{ scene,Vec2{640,448} };
 	dae::Platform p92{ scene,Vec2{352,100} };
 

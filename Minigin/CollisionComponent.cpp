@@ -66,31 +66,44 @@ bool dae::CollisionComponent::IsOverlapping(GameObject* other, Vec2& overlappedA
 		if (cornerpos.y < otherpos.y || othercorner.y < pos.y)
 			return false;
 
-		bool x = false;
-		if(pos.x < othercorner.x)
-		{
-			overlappedAmt.x = pos.x - othercorner.x;
-		}
+		overlappedAmt = CalculateOverlap(Rect{ pos.x,pos.y,m_Width,m_Height }, Rect{ otherpos.x,otherpos.y,othercol->m_Width,othercol->m_Height });
+		//bool x = false;
+		//if(pos.x < othercorner.x)
+		//{
+		//	overlappedAmt.x = cornerpos.x - otherpos.x;
+		//x = true;
+		//}
 
-		else if (otherpos.x < cornerpos.x && !x)
-		{
-			overlappedAmt.x = otherpos.x - cornerpos.x;
-		}
+		//if (otherpos.x < cornerpos.x && !x)
+		//{
+		//	overlappedAmt.x = cornerpos.x - otherpos.x;
+		//}
 
-		bool y = false;
-		if (cornerpos.y > otherpos.y)
-		{
-			overlappedAmt.y =  cornerpos.y - otherpos.y;
-			y = true;
-		}
-		if(othercorner.y > pos.y && !y)
-		{
-			overlappedAmt.y = othercorner.y - pos.y;
-		}
+		//bool y = false;
+		//if (cornerpos.y > otherpos.y)
+		//{
+		//	overlappedAmt.y =  cornerpos.y - otherpos.y;
+		//	y = true;
+		//}
+		//if(othercorner.y > pos.y && !y)
+		//{
+		//	overlappedAmt.y = othercorner.y - pos.y;
+		//}
 
 		return true;
 	}
 	return false;
+}
+
+Vec2 dae::CollisionComponent::CalculateOverlap(Rect rect1, Rect rect2)
+{
+	float dx = std::min(rect1.x + rect1.width, rect2.x + rect2.width) - std::max(rect1.x,rect2.x);
+	float dy = std::min(rect1.y + rect1.height, rect2.y + rect2.height) - std::max(rect1.y, rect2.y);
+
+	if (dx > 0 && dy > 0)
+		return Vec2{ dx,dy };
+
+	return Vec2{};
 }
 
 bool dae::CollisionComponent::IsOverlapping(Rect other)

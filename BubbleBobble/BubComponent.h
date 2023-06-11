@@ -25,10 +25,10 @@ namespace dae {
 
         State m_State{ State::idle };
         float m_Speed = 200.f;
-        float m_JumpSpeed = 400.f;
-        float m_JumpTime = 0.5f;
+        float m_JumpSpeed = 800.f;
+        float m_JumpTime = 0.2f;
         float m_ElapsedJump = 0.f;
-        float m_Gravity = 98.1f;
+        float m_Gravity = 301.f;
 
         bool m_IsJumping = false;
     };
